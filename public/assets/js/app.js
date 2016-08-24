@@ -10,7 +10,7 @@ new Vue({
 //		sortKey: 'date',
 //		reverse: 1,
 		offset: 0,
-		limit: 2,
+		limit: 10,
 		prevButton: false,
 		nextButton: true,
 		cdrs: []
