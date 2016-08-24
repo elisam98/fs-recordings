@@ -32,8 +32,8 @@ block content
 							tr
 								th(v-for="column in columns") {{column | uppercase}}
 						tbody
-							tr(v-for="cdr in cdrs.data | orderBy date -1 | filterBy date in 'date' | filterBy from in 'from' | filterBy to in 'to' | filterBy direction in 'direction'")
-								td {{cdr.date}}
+							tr(v-for="cdr in cdrs.data | orderBy 'date' -1 | filterBy date in 'date' | filterBy from in 'from' | filterBy to in 'to' | filterBy direction in 'direction'")
+								td {{cdr.date | date}}
 								td {{cdr.direction}}
 								td {{cdr.from}}
 								td {{cdr.to}}
@@ -49,6 +49,7 @@ block content
 					button.btn.btn-secondary(type="button" @click="incrementRecords()") Next
 	script(src="assets/js/jquery.js")
 	script(src="assets/js/bootstrap.min.js")
+	script(src="assets/js/moment.js")
 	script(src="assets/js/vue.js")
 	script(src="assets/js/vue-resource.js")
 	script(src="assets/js/app.js")
