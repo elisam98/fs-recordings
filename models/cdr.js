@@ -6,7 +6,7 @@ var cdrSchema = mongoose.Schema({
 	direction: String,
 	from: String,
 	to: String,
-	duration: String,
+	duration: Number,
 	status: String,
 	file: String
 });
