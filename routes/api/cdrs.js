@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
 		direction: req.body.direction,
 		from: req.body.from,
 		to: req.body.to,
-		duration: req.body.duration,
+		duration: req.body.hangup - req.body.answered,
 		status: req.body.status,
 		file: req.body.file
 
