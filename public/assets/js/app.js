@@ -10,7 +10,7 @@ new Vue({
 		from: '',
 		to: '',
 		direction: '',
-		columns: ['Date', 'Direction', 'From', 'To', 'Status', 'File'],
+		columns: ['Date', 'Direction', 'From', 'To', 'Duration', 'Status', 'File'],
 //		sortKey: 'date',
 //		reverse: 1,
 		offset: 0,
