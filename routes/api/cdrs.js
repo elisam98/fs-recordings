@@ -31,10 +31,12 @@ router.post('/', function(req, res, next) {
 	console.log(req.body);
 
 	var cdr = new Cdr({
+		uuid: req.body.uuid,
 		date: req.body.date,
 		direction: req.body.direction,
 		from: req.body.from,
 		to: req.body.to,
+		duration: req.body.duration,
 		status: req.body.status,
 		file: req.body.file
 
