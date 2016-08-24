@@ -5,7 +5,7 @@ var Cdr = require('../../models/cdr');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 
-	Cdr.find({}, function(err, docs) {
+	Cdr.find({}).sort('-date').exec(function(err, docs) {
 		if (err) return handleError(err);
 		var length = docs.length;
 		var limit = req.query.limit? parseInt(req.query.limit) : 5;
