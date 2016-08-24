@@ -28,15 +28,15 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	console.log(req.body);
+	console.log(req.params);
 
 	var cdr = new Cdr({
-		date: req.body.date,
-		direction: req.body.direction,
-		from: req.body.from,
-		to: req.body.to,
-		status: req.body.status,
-		file: req.body.file
+		date: req.params.date,
+		direction: req.params.direction,
+		from: req.params.from,
+		to: req.params.to,
+		status: req.params.status,
+		file: req.params.file
 
 	});
 
