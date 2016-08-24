@@ -1,0 +1,54 @@
+extends layout
+
+block content
+	.container#app
+		.row
+			.col-xs-12
+				h1 Hello, #{user.firstName}
+				p Here are your call logs.
+		.row
+			.card.card-block
+				.row
+					.col-lg-3
+						input.form-control(type="text" v-model="startDate" id="startDate" placeholder="Start Date")
+					.col-lg-3
+						input.form-control(type="text" v-model="endDate" id="endDate" placeholder="End Date")
+					.col-lg-2
+						input.form-control(type="text" v-model="from" id="from" placeholder="From Number")
+					.col-lg-2
+						input.form-control(type="text" v-model="to" id="to" placeholder="To Number")
+					.col-lg-2
+						select.form-control(id="direction" v-model="direction")
+							option(value="") both directions
+							option(value="inbound") inbound
+							option(value="outbound") outbound
+		.row
+			.col-xs-4
+		.row
+			.col-xs-12
+				.table-responsive
+					table.table.table-striped
+						thead
+							tr
+								th(v-for="column in columns") {{column | uppercase}}
+						tbody
+							tr(v-for="cdr in cdrs.data | orderBy date -1 | filterBy date in 'date' | filterBy from in 'from' | filterBy to in 'to' | filterBy direction in 'direction'")
+								td {{cdr.date}}
+								td {{cdr.direction}}
+								td {{cdr.from}}
+								td {{cdr.to}}
+								td {{cdr.status}}
+								td
+									//
+										audio(controls="controls") Your browser does not support the audio element.
+											source(src="{{cdr.file}}")
+		.row
+			.col-xs-12
+				.btn-group
+					button.btn.btn-secondary(type="button" @click="decrementRecords()") Previous
+					button.btn.btn-secondary(type="button" @click="incrementRecords()") Next
+	script(src="assets/js/jquery.js")
+	script(src="assets/js/bootstrap.min.js")
+	script(src="assets/js/vue.js")
+	script(src="assets/js/vue-resource.js")
+	script(src="assets/js/app.js")

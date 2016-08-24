@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	.container
+		h1 Register Page
+		p.lead Say something worthwhile here.
+		br
+		form(action="/register" method="post")
+			.form-group
+				input.form-control(type='text', name="firstName", placeholder='Enter your First Name')
+			.form-group
+				input.form-control(type='text', name="lastName", placeholder='Enter your Last Name')
+			.form-group
+				input.form-control(type='text', name="username", placeholder='Enter Username')
+			.form-group
+				input.form-control(type='password', name="password", placeholder='Password')
+			.form-group
+				input.form-control(type='text', name="email", placeholder='Enter your Email Address')
+			.form-group
+				button.btn.btn-default(type='submit') Submit
+					a(href='/')

@@ -1,0 +1,18 @@
+doctype html
+html
+	head
+		title SafeTelecom Logs
+		meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no')
+		link(href="assets/css/bootstrap.min.css", rel="stylesheet")
+		link(href="assets/css/style.css", rel="stylesheet")
+	body
+		nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
+			.container
+				a.navbar-brand SafeTelecom Logs
+				if(user)
+					ul.nav.navbar-nav.pull-xs-right
+						li.nav-item
+							a.nav-link.active(href="/account/#{user.id}") #{user.username}
+						li.nav-item
+							a.nav-link(href="/logout") Logout
+		block content
