@@ -32,16 +32,14 @@ block content
 							tr
 								th(v-for="column in columns") {{column | uppercase}}
 						tbody
-							tr(v-for="cdr in cdrs.data | orderBy 'date' -1 | filterBy date in 'date' | filterBy from in 'from' | filterBy to in 'to' | filterBy direction in 'direction'")
+							tr(v-for="cdr in cdrs.data | filterBy date in 'date' | filterBy from in 'from' | filterBy to in 'to' | filterBy direction in 'direction'")
 								td {{cdr.date | date}}
 								td {{cdr.direction}}
 								td {{cdr.from}}
 								td {{cdr.to}}
+								td {{cdr.duration}}
 								td {{cdr.status}}
-								td
-									//
-										audio(controls="controls") Your browser does not support the audio element.
-											source(src="{{cdr.file}}")
+								td {{cdr.uuid}}
 		.row
 			.col-xs-12
 				.btn-group
