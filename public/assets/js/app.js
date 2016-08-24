@@ -1,3 +1,7 @@
+Vue.filter('date', function (val) {
+	return moment(val / 1000).format('LLL');
+});
+
 new Vue({
 	el: '#app',
 	data: {
