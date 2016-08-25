@@ -1,5 +1,5 @@
 Vue.filter('date', function (val) {
-	return moment.unix(val).format('LL LTS');
+	return moment.unix(val).format('l LTS');
 });
 
 new Vue({
