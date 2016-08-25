@@ -2,13 +2,16 @@ var express = require('express');
 var router = express.Router();
 var Cdr = require('../../models/cdr');
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
 
-	Cdr.find({}).sort('-date').exec(function(err, docs) {
+	var from = req.query.from ? req.query.from : '.*';
+	var to = req.query.to ? req.query.to : '.*';
+	var direction = req.query.direction ? req.query.direction : '.*';
+
+	Cdr.find({from: new RegExp(from), to: new RegExp(to), direction: new RegExp(direction)}).sort('-date').exec(function(err, docs) {
 		if (err) return handleError(err);
 		var length = docs.length;
-		var limit = req.query.limit? parseInt(req.query.limit) : 5;
+		var limit = req.query.limit ? parseInt(req.query.limit) : 5;
 		var offset = req.query.offset ? parseInt(req.query.offset) : 0;
 
 		docs = offset > 0 ? docs.slice(offset, offset + limit) : docs.slice(offset, limit);
@@ -18,8 +21,6 @@ router.get('/', function(req, res, next) {
 				length: length,
 				offset: offset,
 				limit: limit,
-//				page: page,
-//				total_pages: totalPages
 			},
 			data: docs
 		});

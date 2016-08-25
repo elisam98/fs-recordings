@@ -11,10 +11,8 @@ new Vue({
 		to: '',
 		direction: '',
 		columns: ['Date', 'Direction', 'From', 'To', 'Duration', 'Status', 'File'],
-//		sortKey: 'date',
-//		reverse: 1,
 		offset: 0,
-		limit: 10,
+		limit: 25,
 		prevButton: false,
 		nextButton: true,
 		cdrs: []
@@ -26,8 +24,11 @@ new Vue({
 		fetchRecords: function() {
 			var limit = parseInt(this.limit);
 			var offset = parseInt(this.offset);
+			var from = this.from;
+			var to = this.to;
+			var direction = this.direction;
 
-			this.$http.get('/api/cdrs?limit=' + limit + '&offset=' + offset).then((response)=> {
+			this.$http.get('/api/cdrs?limit=' + limit + '&offset=' + offset + '&from=' + from + '&to=' + to + '&direction=' + direction).then((response)=> {
 				this.$set('cdrs', response.json());
 //				console.log(response);
 			}, (error)=> {

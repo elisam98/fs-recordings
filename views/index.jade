@@ -14,11 +14,11 @@ block content
 					.col-lg-3
 						input.form-control(type="text" v-model="endDate" id="endDate" placeholder="End Date")
 					.col-lg-2
-						input.form-control(type="text" v-model="from" id="from" placeholder="From Number")
+						input.form-control(type="text" v-model="from" id="from" placeholder="From Number" @keyup="fetchRecords()")
 					.col-lg-2
-						input.form-control(type="text" v-model="to" id="to" placeholder="To Number")
+						input.form-control(type="text" v-model="to" id="to" placeholder="To Number" @keyup="fetchRecords()")
 					.col-lg-2
-						select.form-control(id="direction" v-model="direction")
+						select.form-control(id="direction" v-model="direction" @change="fetchRecords()")
 							option(value="") both directions
 							option(value="inbound") inbound
 							option(value="outbound") outbound
@@ -32,7 +32,7 @@ block content
 							tr
 								th(v-for="column in columns") {{column | uppercase}}
 						tbody
-							tr(v-for="cdr in cdrs.data | filterBy date in 'date' | filterBy from in 'from' | filterBy to in 'to' | filterBy direction in 'direction'")
+							tr(v-for="cdr in cdrs.data")
 								td {{cdr.date | date}}
 								td {{cdr.direction}}
 								td {{cdr.from}}
