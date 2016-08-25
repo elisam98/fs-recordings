@@ -46,6 +46,9 @@ new Vue({
 			console.log('Offset: ' + this.offset);
 			this.fetchRecords();
 
+		},
+		filterRecords: function() {
+			this.fetchRecords();
 		}
 	}
 });
