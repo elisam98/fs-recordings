@@ -1,5 +1,8 @@
 Vue.filter('date', function (val) {
-	return moment.unix(val).format('l LTS');
+	return moment.unix(val).format('l');
+});
+Vue.filter('time', function (val) {
+	return moment.unix(val).format('LTS');
 });
 
 new Vue({
@@ -10,7 +13,7 @@ new Vue({
 		from: '',
 		to: '',
 		direction: '',
-		columns: ['Date', 'Direction', 'From', 'To', 'Duration', 'Status', 'File'],
+		columns: ['Date', 'Time', 'Direction', 'From', 'To', 'Duration', 'Status', 'File'],
 		offset: 0,
 		limit: 25,
 		prevButton: false,
