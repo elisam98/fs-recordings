@@ -28,26 +28,26 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-	var record = req.body.cdr;
-	console.log(cdr);
+	var record = JSON.parse(req.body.cdr).variables;
+	console.log(record);
+	
+	if(record.domain_name == 'mytickets.com') {
+		var cdr = new Cdr({
+			uuid: record.uuid,
+			date: record.start_epoch,
+			direction: record.direction,
+			from: record.sip_from_user,
+			to: record.sip_to_user,
+			duration: record.billsec,
+			status: record.hangup_cause,
+			file: record.uuid
+		});
 
-	var cdr = new Cdr({
-		uuid: req.body.uuid,
-		date: req.body.date,
-		direction: req.body.direction,
-		from: req.body.from,
-		to: req.body.to,
-		duration: req.body.hangup - req.body.answered,
-		status: req.body.status,
-		file: req.body.file
-
-	});
-
-	cdr.save(function (err) {
-		if (err) return handleError(err);
-		res.json(req.body);
-	});
-
+		cdr.save(function (err) {
+			if (err) return handleError(err);
+			res.json(cdr);
+		});
+	}
 
 });
 
