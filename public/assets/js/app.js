@@ -38,8 +38,10 @@ new Vue({
 			var from = this.from;
 			var to = this.to;
 			var direction = this.direction;
+			var startDate = this.startDate;
+			var endDate = this.endDate;
 
-			this.$http.get('/api/cdrs?limit=' + limit + '&offset=' + offset + '&from=' + from + '&to=' + to + '&direction=' + direction).then((response)=> {
+			this.$http.get('/api/cdrs?limit=' + limit + '&offset=' + offset + '&from=' + from + '&to=' + to + '&direction=' + direction + '&startDate=' + startDate + '&endDate=' + endDate).then((response)=> {
 				this.$set('cdrs', response.json());
 //				console.log(response);
 			}, (error)=> {

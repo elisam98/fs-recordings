@@ -10,9 +10,9 @@ block content
 			.card.card-block
 				.row
 					.col-lg-3
-						input.form-control(type="text" v-model="startDate" id="startDate" placeholder="Start Date")
+						input.form-control(type="text" v-model="startDate" id="startDate" placeholder="Start Date" @change="filterRecords()")
 					.col-lg-3
-						input.form-control(type="text" v-model="endDate" id="endDate" placeholder="End Date")
+						input.form-control(type="text" v-model="endDate" id="endDate" placeholder="End Date" @change="filterRecords()")
 					.col-lg-2
 						input.form-control(type="text" v-model="from" id="from" placeholder="From Number" @change="filterRecords()")
 					.col-lg-2

@@ -17,8 +17,17 @@ router.get('/', function(req, res, next) {
 	var from = req.query.from ? req.query.from : '.*';
 	var to = req.query.to ? req.query.to : '.*';
 	var direction = req.query.direction ? req.query.direction : '.*';
+	var startDate = parseInt(req.query.startDate ? req.query.startDate : 0);
+	var endDate = parseInt(req.query.endDate ? req.query.endDate : Date.now());
 
-	Cdr.find({from: new RegExp(from), to: new RegExp(to), direction: new RegExp(direction)}).sort('-date').exec(function(err, docs) {
+
+	Cdr.find({from: new RegExp(from),
+				to: new RegExp(to),
+				direction: new RegExp(direction),
+				date: {$gt: startDate, $lte: endDate}
+			})
+	.sort('-date')
+	.exec(function(err, docs) {
 		if (err) return handleError(err);
 		var length = docs.length;
 		var limit = req.query.limit ? parseInt(req.query.limit) : 5;
@@ -31,6 +40,8 @@ router.get('/', function(req, res, next) {
 				length: length,
 				offset: offset,
 				limit: limit,
+				startDate: startDate,
+				endDate: endDate
 			},
 			data: docs
 		});
