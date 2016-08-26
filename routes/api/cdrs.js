@@ -1,5 +1,15 @@
 var express = require('express');
 var router = express.Router();
+var io = require('socket.io');/*
+var Pusher = require('pusher');
+
+var pusher = new Pusher({
+	appId: '218047',
+	key: '3256de8e7524ded6a349',
+	secret: '90afb5f28db15cfc3157',
+	encrypted: true
+});
+*/
 var Cdr = require('../../models/cdr');
 
 router.get('/', function(req, res, next) {
@@ -46,6 +56,8 @@ router.post('/', function(req, res, next) {
 
 		cdr.save(function (err) {
 			if (err) return handleError(err);
+			io.sockets.emit('dbUpdate');
+//			pusher.trigger('mytickets', 'update_record', {"message": "Update Triggered."});
 			res.json(cdr);
 		});
 	}
