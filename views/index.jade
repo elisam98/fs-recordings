@@ -40,7 +40,9 @@ block content
 								td {{cdr.to}}
 								td {{cdr.duration}}
 								td {{cdr.status}}
-								td {{cdr.uuid}}
+								td
+									audio(controls="controls")
+										source(:src="'//s3.amazonaws.com/mytickets-recordings/' + cdr.uuid + '.wav'")
 		.row
 			.col-xs-12
 				.btn-group
