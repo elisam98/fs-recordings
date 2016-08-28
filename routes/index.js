@@ -3,13 +3,11 @@ var router = express.Router();
 var passport = require('passport');
 var Account = require('../models/account');
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
 	if(!req.user) {
 		res.redirect('/logout');
 	} else {
 		res.render('index', {user: req.user});
-//		res.sendfile('../public/index.html');
 	}
 });
 

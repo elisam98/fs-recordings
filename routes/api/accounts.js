@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Account = require('../../models/account');
 
-/* GET users listing. */
 router.get('/', function(req, res, next) {
 	Account.find({}, function(err, docs) {
 		if (err) return handleError(err);
