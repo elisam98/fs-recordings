@@ -20,14 +20,6 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-var io = require('socket.io').listen(server);
-
-io.sockets.on('connection', function (socket) {
-  socket.on('dBUpdate', function (message) {
-    socket.emit('dbUpdate');
-
-  });
-});
 
 /**
  * Listen on provided port, on all network interfaces.

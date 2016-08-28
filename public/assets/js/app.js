@@ -1,8 +1,8 @@
 Vue.filter('date', function (val) {
-	return moment.unix(val).format('l');
+	return moment(val).format('l');
 });
 Vue.filter('time', function (val) {
-	return moment.unix(val).format('LTS');
+	return moment(val).format('LTS');
 });
 
 new Vue({
@@ -22,14 +22,6 @@ new Vue({
 	},
 	ready: function() {
 		this.fetchRecords();
-
-		var that = this;
-		var socket = io.connect();
-
-		socket.on('dBUpdate', function(data) {
-			console.log('updated.');
-			that.fetchRecords();
-		});
 	},
 	methods: {
 		fetchRecords: function() {

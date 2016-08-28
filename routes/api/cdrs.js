@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 	Cdr.find({from: new RegExp(from),
 				to: new RegExp(to),
 				direction: new RegExp(direction),
-				date: {$gt: startDate, $lte: endDate}
+				date: {$gte: startDate, $lte: endDate}
 			})
 	.sort('-date')
 	.exec(function(err, docs) {
@@ -47,7 +47,7 @@ router.post('/', function(req, res, next) {
 	if(record.domain_name == 'mytickets.com') {
 		var cdr = new Cdr({
 			uuid: record.uuid,
-			date: record.start_epoch,
+			date: record.start_epoch * 1000,
 			direction: record.direction,
 			from: record.sip_from_user,
 			to: record.sip_to_user,
@@ -58,7 +58,6 @@ router.post('/', function(req, res, next) {
 
 		cdr.save(function (err) {
 			if (err) return handleError(err);
-			io.sockets.emit('dbUpdate');
 			res.json(cdr);
 		});
 	}
