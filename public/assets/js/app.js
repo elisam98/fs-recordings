@@ -16,7 +16,7 @@ new Vue({
 		from: '',
 		to: '',
 		direction: '',
-		columns: ['Date', 'Time', 'Direction', 'From', 'To', 'Duration', 'Status', 'File'],
+		columns: ['Date', 'Time', 'Direction', 'From', 'To', 'Duration', 'Status', 'Recording'],
 		offset: 0,
 		limit: 25,
 		prevButton: false,
