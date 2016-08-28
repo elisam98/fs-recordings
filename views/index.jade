@@ -9,21 +9,27 @@ block content
 		.row
 			.card.card-block
 				.row
-					.col-lg-3
-						input.form-control(type="date" v-model="startDate" id="startDate" placeholder="Start Date" @change="filterRecords()")
-					.col-lg-3
-						input.form-control(type="date" v-model="endDate" id="endDate" placeholder="End Date" @change="filterRecords()")
-					.col-lg-2
-						input.form-control(type="text" v-model="from" id="from" placeholder="From Number" @change="filterRecords()")
-					.col-lg-2
-						input.form-control(type="text" v-model="to" id="to" placeholder="To Number" @change="filterRecords()")
-					.col-lg-2
+					.col-lg-3.form-group
+						label(for="startDate") From Date
+						input.form-control(type="date" v-model="startDate" id="startDate" @change="filterRecords()")
+					.col-lg-3.form-group
+						label(for="endDate") To Date
+						input.form-control(type="date" v-model="endDate" id="endDate" @change="filterRecords()")
+					.col-lg-2.form-group
+						label(for="from") From Number
+						input.form-control(type="text" v-model="from" id="from" @change="filterRecords()")
+					.col-lg-2.form-group
+						label(for="to") To Number
+						input.form-control(type="text" v-model="to" id="to" @change="filterRecords()")
+					.col-lg-2.form-group
+						label(for="direction") Call Direction
 						select.form-control(id="direction" v-model="direction" @change="fetchRecords()")
-							option(value="") both directions
+							option(value="") both
 							option(value="inbound") inbound
 							option(value="outbound") outbound
-		.row
-			.col-xs-4
+				.row
+					.col-xs-1
+						button.btn.btn-primary(@click="fetchRecords") Filter
 		.row
 			.col-xs-12
 				.table-responsive
