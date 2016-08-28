@@ -38,9 +38,8 @@ new Vue({
 
 			this.$http.get('/api/cdrs?limit=' + limit + '&offset=' + offset + '&from=' + from + '&to=' + to + '&direction=' + direction + '&startDate=' + startDate + '&endDate=' + endDate).then((response)=> {
 				this.$set('cdrs', response.json());
-//				console.log(response);
 			}, (error)=> {
-//				console.log(response);
+				console.log(error);
 			});
 		},
 		incrementRecords: function() {
