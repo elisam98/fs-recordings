@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var io = require('socket.io');
+var moment = require('moment');
 var Cdr = require('../../models/cdr');
 
 router.get('/', function(req, res, next) {
@@ -8,9 +8,8 @@ router.get('/', function(req, res, next) {
 	var from = req.query.from ? req.query.from : '.*';
 	var to = req.query.to ? req.query.to : '.*';
 	var direction = req.query.direction ? req.query.direction : '.*';
-	var startDate = parseInt(req.query.startDate ? req.query.startDate : 0);
-	var endDate = parseInt(req.query.endDate ? req.query.endDate : Date.now());
-
+	var startDate = req.query.startDate ? moment(req.query.startDate).valueOf() : 0;
+	var endDate = req.query.endDate ? moment(req.query.endDate).valueOf() : Date.now();
 
 	Cdr.find({from: new RegExp(from),
 				to: new RegExp(to),
