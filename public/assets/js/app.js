@@ -4,6 +4,9 @@ Vue.filter('date', function (val) {
 Vue.filter('time', function (val) {
 	return moment(val).format('LTS');
 });
+Vue.filter('phone', function (val) {
+	return val.slice(-10);
+});
 
 new Vue({
 	el: '#app',
