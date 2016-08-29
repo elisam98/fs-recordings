@@ -18,15 +18,17 @@ router.get('/logout', function(req, res, next) {
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('login', { user: req.user });
+	// console.log(req.flash);
+	res.render('login', { user: req.user, message: req.flash('error')});
 });
 
 router.post('/login',
 	passport.authenticate('local', {
 		successRedirect: '/',
-		failureRedirect: '/login'
+		failureRedirect: '/login',
+		failureFlash : true
 	}), function(req, res) {
-		console.log('hit login');
+//		console.log('hit login');
 	}
 );
 

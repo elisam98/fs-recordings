@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-// var flash = require('connect-flash');
+var flash = require('connect-flash');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://root:chilling@ds139425.mlab.com:39425/recordings');
@@ -46,6 +46,7 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
 var Account = require('./models/account');
 passport.use(new LocalStrategy(Account.authenticate()));
