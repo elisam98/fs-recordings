@@ -7,12 +7,15 @@ html
 		link(href="assets/css/style.css", rel="stylesheet")
 	body
 		nav.navbar.navbar-fixed-top.navbar-dark.bg-primary
-			.container
-				a.navbar-brand SafeTelecom Logs
-				if(user)
-					ul.nav.navbar-nav.pull-xs-right
+			a.navbar-brand SafeTelecom Logs
+			if(user)
+				ul.nav.navbar-nav
+				ul.nav.navbar-nav.pull-xs-right
+					li.nav-item
+						a.nav-link.active(href="/account/#{user.id}") #{user.username}
+					if(user.role == 'admin')
 						li.nav-item
-							a.nav-link.active(href="/account/#{user.id}") #{user.username}
-						li.nav-item
-							a.nav-link(href="/logout") Logout
+							a.nav-link(href="/register") Add User
+					li.nav-item
+						a.nav-link(href="/logout") Logout
 		block content

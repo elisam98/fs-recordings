@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) {
 		username: req.body.username,
 		password: req.body.password,
 		email: req.body.email,
-		isAdmin: req.body.isAdmin,
+		role: req.body.role,
 	});
 
 	account.save(function (err) {

@@ -31,7 +31,12 @@ router.post('/login',
 );
 
 router.get('/register', function(req, res) {
-	res.render('register');
+	if(!req.user) {
+		res.redirect('/');
+	} else if (req.user.role === 'admin') {
+		res.render('register', {user: req.user});
+	}
+	res.redirect('/');
 });
 
 router.post('/register', function(req, res) {
@@ -40,6 +45,7 @@ router.post('/register', function(req, res) {
 		lastName: req.body.lastName,
 		username: req.body.username,
 		email: req.body.email,
+		role: req.body.role,
 	}), req.body.password, function(err, account) {
 		if (err) {
 			return res.render('register', { account : account });
