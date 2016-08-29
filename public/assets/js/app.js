@@ -19,12 +19,19 @@ new Vue({
 		columns: ['Date', 'Time', 'Direction', 'From', 'To', 'Duration', 'Status', 'Recording'],
 		offset: 0,
 		limit: 25,
-		prevButton: false,
-		nextButton: true,
 		cdrs: []
 	},
 	ready: function() {
 		this.fetchRecords();
+	},
+	computed: {
+		prevDisabled: function() {
+			return this.offset <= 0;
+		},
+		nextDisabled: function() {
+			console.log(this.cdrs.meta.length);
+			return this.offset + this.limit >= this.cdrs.meta.length;
+		}
 	},
 	methods: {
 		fetchRecords: function() {

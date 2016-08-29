@@ -3,19 +3,33 @@ extends layout
 block content
 	.container
 		h1 Register Page
-		p.lead Say something worthwhile here.
+		p.lead Register a new user here.
 		br
 		form(action="/register" method="post")
-			.form-group
-				input.form-control(type='text', name="firstName", placeholder='Enter your First Name')
-			.form-group
-				input.form-control(type='text', name="lastName", placeholder='Enter your Last Name')
-			.form-group
-				input.form-control(type='text', name="username", placeholder='Enter Username')
-			.form-group
-				input.form-control(type='password', name="password", placeholder='Password')
-			.form-group
-				input.form-control(type='text', name="email", placeholder='Enter your Email Address')
-			.form-group
+			.form-group.row
+				label.col-xs-2.col-form-label(for="firstName") First Name
+				.col-xs-10
+					input.form-control(type='text', name="firstName" id="firstName")
+			.form-group.row
+				label.col-xs-2.col-form-label(for="lastName") Last Name
+				.col-xs-10
+					input.form-control(type='text', name="lastName", id="lastName")
+			.form-group.row
+				label.col-xs-2.col-form-label(for="username") Username
+				.col-xs-10
+					input.form-control(type='text', name="username", id="username")
+			.form-group.row
+				label.col-xs-2.col-form-label(for="password") Password
+				.col-xs-10
+					input.form-control(type='password', name="password", id="password")
+			.form-group.row
+				label.col-xs-2.col-form-label(for="email") Email Address
+				.col-xs-10
+					input.form-control(type='text', name="email", id="email")
+			.form-group.row
+				label.col-xs-2.col-form-label(for="isAdmin") Administrator
+				.col-xs-1
+					input.form-control(type='checkbox', name="isAdmin", id="isAdmin")
+			.form-group.row
 				button.btn.btn-default(type='submit') Submit
 					a(href='/')

@@ -3,9 +3,11 @@ extends layout
 block content
 	.container#app
 		.row
-			.col-xs-12
+			.col-xs-11
 				h1 Hello, #{user.firstName}
 				p Here are your call logs.
+			.col-xs-1
+				button.btn.btn-default(@click="fetchRecords()") Refresh
 		.row
 			.card.card-block
 				.row
@@ -29,7 +31,7 @@ block content
 							option(value="outbound") outbound
 				.row
 					.col-xs-1
-						button.btn.btn-primary(@click="fetchRecords") Filter
+						button.btn.btn-primary(@click="fetchRecords()") Filter
 		.row
 			.col-xs-12
 				.table-responsive
@@ -49,11 +51,11 @@ block content
 								td
 									audio(controls="controls")
 										source(:src="'//s3.amazonaws.com/mytickets-recordings/recordings/' + cdr.uuid + '.wav'")
-		.row
+		.row.text-xs-center
 			.col-xs-12
 				.btn-group
-					button.btn.btn-secondary(type="button" @click="decrementRecords()") Previous
-					button.btn.btn-secondary(type="button" @click="incrementRecords()") Next
+					button.btn.btn-secondary(type="button" @click="decrementRecords()" v-bind="class={disabled: prevDisabled}") Previous
+					button.btn.btn-secondary(type="button" @click="incrementRecords()" v-bind="class={disabled: nextDisabled}") Next
 	script(src="assets/js/jquery.js")
 	script(src="assets/js/bootstrap.min.js")
 	script(src="assets/js/moment.js")
