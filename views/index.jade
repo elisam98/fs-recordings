@@ -49,7 +49,7 @@ block content
 								td {{cdr.duration}}
 								td {{cdr.status}}
 								td
-									audio(controls="controls")
+									audio(controls="controls" preload="metadata")
 										source(:src="'//s3.amazonaws.com/mytickets-recordings/recordings/' + cdr.uuid + '.wav'")
 		.row.text-xs-center
 			.col-xs-12
