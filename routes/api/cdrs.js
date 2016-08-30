@@ -1,9 +1,10 @@
+/* global handleError */
 var express = require('express');
 var router = express.Router();
 var moment = require('moment');
 var Cdr = require('../../models/cdr');
 
-router.get('/', function(req, res, next) {
+router.get('/', (req, res)=> {
 
 	var from = req.query.from ? req.query.from : '.*';
 	var to = req.query.to ? req.query.to : '.*';
@@ -17,7 +18,7 @@ router.get('/', function(req, res, next) {
 				date: {$gte: startDate, $lte: endDate}
 			})
 	.sort('-date')
-	.exec(function(err, docs) {
+	.exec((err, docs)=> {
 		if (err) return handleError(err);
 		var length = docs.length;
 		var limit = req.query.limit ? parseInt(req.query.limit) : 5;
@@ -39,10 +40,9 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', (req, res)=> {
 	var record = JSON.parse(req.body.cdr).variables;
-	console.log(record);
-	
+//	console.log(record);
 	if(record.domain_name == 'mytickets.com') {
 		var cdr = new Cdr({
 			uuid: record.uuid,
@@ -55,7 +55,7 @@ router.post('/', function(req, res, next) {
 			file: record.uuid
 		});
 
-		cdr.save(function (err) {
+		cdr.save((err)=> {
 			if (err) return handleError(err);
 			res.json(cdr);
 		});

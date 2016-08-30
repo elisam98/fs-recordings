@@ -29,7 +29,6 @@ new Vue({
 			return this.offset <= 0;
 		},
 		nextDisabled: function() {
-			console.log(this.cdrs.meta.length);
 			return this.offset + this.limit >= this.cdrs.meta.length;
 		}
 	},
@@ -45,19 +44,17 @@ new Vue({
 
 			this.$http.get('/api/cdrs?limit=' + limit + '&offset=' + offset + '&from=' + from + '&to=' + to + '&direction=' + direction + '&startDate=' + startDate + '&endDate=' + endDate).then((response)=> {
 				this.$set('cdrs', response.json());
-			}, (error)=> {
-				console.log(error);
 			});
 		},
 		incrementRecords: function() {
 			this.offset = this.offset + this.limit;
-			console.log('Offset: ' + this.offset);
+//			console.log('Offset: ' + this.offset);
 			this.fetchRecords();
 
 		},
 		decrementRecords: function() {
 			this.offset = this.offset - this.limit;
-			console.log('Offset: ' + this.offset);
+//			console.log('Offset: ' + this.offset);
 			this.fetchRecords();
 
 		},

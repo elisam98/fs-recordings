@@ -1,10 +1,12 @@
+/*eslint no-console: ["error", { allow: ["warn", "error"] }] */
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session = require('express-session');
+// var session = require('express-session');
 var flash = require('connect-flash');
 
 var mongoose = require('mongoose');
@@ -17,15 +19,14 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var routes = require('./routes/index');
 var api = require('./routes/api/index');
-var account = require('./routes/account');
 var accounts = require('./routes/api/accounts');
 var cdrs = require('./routes/api/cdrs');
 
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log('DB Connected!');
+db.once('open', ()=> {
+	console.warn('DB Connected!');
 });
 
 
@@ -39,9 +40,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('express-session')({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: false
+	secret: 'keyboard cat',
+	resave: false,
+	saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -55,33 +56,32 @@ passport.deserializeUser(Account.deserializeUser());
 
 
 app.use('/', routes);
-app.use('/account', account);
 app.use('/api', api);
 app.use('/api/accounts', accounts);
 app.use('/api/cdrs', cdrs);
 
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use((req, res, next)=> {
+	var err = new Error('Not Found');
+	err.status = 404;
+	next(err);
 });
 
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
+	app.use((err, req, res)=> {
+		res.status(err.status || 500);
+		res.render('error', {
+			message: err.message,
+			error: err
+		});
+	});
 }
 
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+app.use((err, req, res)=> {
+	res.status(err.status || 500);
+	res.render('error', {
+		message: err.message,
+		error: {}
+	});
 });
 
 
